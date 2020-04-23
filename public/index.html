@@ -9,23 +9,32 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/index.css" />
     <script type="text/javascript" src="jquery/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="art-template/template-web.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
     <!-- 第一栏 -->
     <div class="header">
         <div class="header-userpic">
-            <img src="./images/menu-block-2.png" alt="">
+            <img src="./images/user-img.jpg" alt="">
         </div>
-        <div class="header-username">高山我梦</div>
+        <div class="header-username" id="user_name">
+            <script type="text/html" id="user_name_tpl">
+                <span>{{username}}</span>
+            </script>
+        </div>
         <div class="header-userinf">
-            <div class="userinf-score">
-                <span>33</span>
-                <span>我的积分</span>
+            <div class="userinf-score" id="user_score">
+                 <script type="text/html" id="user_score_tpl">
+                    <span>{{userscore}}</span>
+                    <span>我的积分</span>
+                 </script>
             </div>
-            <div class="userinf-ranking">
-                <span>27153</span>
-                <span>积分排名</span>
+            <div class="userinf-ranking" id="user_ranking">
+                <script type="text/html" id="user_ranking_tpl">
+                    <span>{{userranking}}</span>
+                    <span>积分排名</span>
+                </script>
             </div>
         </div>
     </div>
@@ -83,77 +92,19 @@
     <!-- 积分榜 -->
     <div class="scoreboard">
         <div class="scoreboard-header">积分排名</div>
-        <div class="scoreboard-main">
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
+        <div class="scoreboard-main" id="scoreboard">
+            <script type="text/html" id="scoreboard_tpl">
+                {{each user}}
+                <div class="scoreboard-mian-block">
+                    <div class="block-userpic">
+                        <img src="./images/user-img.jpg" alt="">
+                        <div class="userpic-rankicon">{{$value.rank}}</div>
+                    </div>
+                    <div class="block-username">{{$value.name}}</div>
+                    <div class="block-userscore">{{$value.score}}</div>
                 </div>
-                <div class="block-username">用户1</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户2</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户3</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户4</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户5</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户6</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户7</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户8</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户9</div>
-                <div class="block-userscore">10866分</div>
-            </div>
-            <div class="scoreboard-mian-block">
-                <div class="block-userpic">
-                    <img src="./images/menu-block-3.png" alt="">
-                </div>
-                <div class="block-username">用户10</div>
-                <div class="block-userscore">10866分</div>
-            </div>
+                {{/each}}
+            </script>
         </div>
     </div>
     <!-- 遮罩层 -->
@@ -166,17 +117,21 @@
         </div>
         <div class="pop-main">
             <div class="pop-main-box"></div>
-            <div class="pop-main-subhead">你连续签到第1天</div>
+            <div class="pop-main-subhead" id="user_signdays">
+                <script type="text/html" id="user_signdays_tpl">
+                    <span>你连续签到第{{usersigndays}}天</span>
+                </script>
+                </div>
             <div class="pop-main-checks">
                 <div class="pop-main-check">
-                    <div class="check-box check-box-active" id="check_1">
+                    <div class="check-box" id="check_1">
                         <img src="./images/coin.png" alt="">
                         <span>积分+3</span>
                     </div>
                     <span>第1天</span>
                 </div>
                 <div class="pop-main-check">
-                    <div class="check-box check-box-active" id="check_2">
+                    <div class="check-box" id="check_2">
                         <img src="./images/coin.png" alt="">
                         <span>积分+3</span>
                     </div>

@@ -11,58 +11,63 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-//输出字符串
-app.get('/first', (req, res) => {
-    res.send('helloajax!');
-});
-//输出json
-app.get('/responseData', (req, res) => {
-    res.send({
-        "name": "zs"
-    });
-});
-//接收前端数据并响应
-app.get('/get', (req, res) => {
-    res.send(req.query);
+
+app.post('/Login', (req, res) => {
+    res.send(
+        {
+            name: "高山我梦",
+            score: "33",
+            ranking: "27153",
+            signdays: "3"
+        }
+    );
 });
 
-app.post('/post', (req, res) => {
-    res.send(req.body);
+app.post('/Scoreboard', (req, res) => {
+    res.send([
+        {
+            rank: "1",
+            name: "1号选手",
+            score: "102435",
+        }, {
+            rank: "2",
+            name: "2号选手",
+            score: "102012",
+        }, {
+            rank: "3",
+            name: "3号选手",
+            score: "101522",
+        }, {
+            rank: "4",
+            name: "4号选手",
+            score: "101013",
+        }, {
+            rank: "5",
+            name: "5号选手",
+            score: "100125",
+        }, {
+            rank: "6",
+            name: "6号选手",
+            score: "100111",
+        }, {
+            rank: "7",
+            name: "7号选手",
+            score: "98415",
+        }, {
+            rank: "8",
+            name: "8号选手",
+            score: "98015",
+        }, {
+            rank: "9",
+            name: "9号选手",
+            score: "97023",
+        }, {
+            rank: "10",
+            name: "10号选手",
+            score: "90145",
+        }
+    ]);
 });
-
-app.post('/json', (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
-});
-
-app.get('/error', (req, res) => {
-    res.status(400).send('not ok');
-});
-
-app.post('/vertifyEmail', (req, res) => {
-    if (req.body.email == 'yangpeizhuo@163.com') {
-        res.send('该邮箱已经被注册');
-    } else {
-        res.send('该邮箱可以被使用');
-    }
-});
-
-app.post('/autoOutput', (req, res) => {
-
-    if (req.body.key == '杨') {
-        res.send(['杨铭屌爆了']);
-    }
-    if (req.body.key == '杨培') {
-        res.send(['杨培卓真帅', '杨培卓真可爱']);
-    }
-    if (req.body.key == '杨培卓') {
-        res.send(['杨培卓真帅', '杨培卓真可爱', '杨培卓最棒了']);
-    } else {
-        res.send([]);
-    }
-});
-
-
 
 //监听端口
 app.listen(3000);
